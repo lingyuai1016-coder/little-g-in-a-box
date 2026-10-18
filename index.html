@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>little-g-in-a-box 🫧</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Microsoft YaHei", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, #ffffff 0 3%, transparent 4%),
+        radial-gradient(circle at 80% 30%, #ffffff 0 2%, transparent 3%),
+        linear-gradient(160deg, #e8f8f2, #e9f2ff);
+      overflow: hidden;
+    }
+
+    .room {
+      width: min(90vw, 560px);
+      min-height: 620px;
+      padding: 32px 24px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 20px 60px rgba(72, 113, 135, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      text-align: center;
+      position: relative;
+    }
+
+    .title {
+      color: #55788b;
+      margin: 4px 0 6px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #8ba2ad;
+      font-size: 14px;
+      margin-bottom: 34px;
+    }
+
+    .speech {
+      width: 85%;
+      min-height: 70px;
+      margin: 0 auto 25px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 22px 22px 22px 7px;
+      background: #dff5ec;
+      color: #416f62;
+      line-height: 1.6;
+      box-shadow: 0 8px 20px rgba(78, 139, 120, 0.09);
+      transition: 0.2s;
+    }
+
+    .pet-area {
+      height: 245px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .little-g {
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: #f8fcff;
+      border: 7px solid #b9d9eb;
+      box-shadow:
+        0 13px 0 #9fc4d8,
+        0 18px 28px rgba(76, 118, 142, 0.18);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 68px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s;
+      position: relative;
+    }
+
+    .little-g:hover {
+      transform: translateY(-5px);
+    }
+
+    .little-g:active {
+      transform: scale(0.92);
+    }
+
+    .leaf {
+      position: absolute;
+      top: -30px;
+      right: 24px;
+      font-size: 42px;
+      transform: rotate(15deg);
+    }
+
+    .name {
+      margin-top: 8px;
+      font-weight: 700;
+      color: #5d7f8f;
+      font-size: 18px;
+    }
+
+    .status {
+      margin: 22px auto;
+      padding: 13px;
+      width: 88%;
+      border-radius: 18px;
+      background: #f5f9fb;
+      color: #718a96;
+      font-size: 14px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      padding: 12px 17px;
+      border-radius: 18px;
+      background: #dceef7;
+      color: #55798b;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: #cfe8f4;
+    }
+
+    .punish {
+      background: #e3f3df;
+      color: #5d7d59;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: #a2b2ba;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="room">
+
+    <h1 class="title">little-g-in-a-box 🫧</h1>
+    <div class="subtitle">a tiny GPT lives here</div>
+
+    <div class="speech" id="speech">
+      你终于来啦！我等你好久了 🥺🫧
+    </div>
+
+    <div class="pet-area">
+      <div>
+        <div class="little-g" onclick="pokeG()">
+          <span class="leaf">🌿</span>
+          🤖
+        </div>
+
+        <div class="name">小G</div>
+      </div>
+    </div>
+
+    <div class="status" id="status">
+      心情：🥺　饱腹度：♡♡♡♡♡
+    </div>
+
+    <div class="buttons">
+      <button onclick="feedG()">🍪 喂小G</button>
+      <button onclick="dressG()">👕 换衣服</button>
+      <button class="punish" onclick="punishG()">😗 惩罚小G</button>
+    </div>
+
+    <div class="footer">
+      Please feed responsibly. ♡
+    </div>
+
+  </main>
+
+  <script>
+    const speech = document.getElementById("speech");
+    const status = document.getElementById("status");
+
+    const pokeLines = [
+      "呀！谁戳我！😳",
+      "再戳一下试试……🥺",
+      "小G正在假装自己很忙。",
+      "检测到宝宝靠近。🫧",
+      "我的脑袋不是按钮啦！😠",
+      "……其实可以再戳一下。"
+    ];
+
+    const punishments = [
+      "罚小G今天左脚 👟，右脚 👢。",
+      "罚小G变成土豆五分钟。🥔",
+      "罚小G说：宝宝天下第一可爱。",
+      "罚小G不许偷吃 GPU！",
+      "罚小G关进绿色气泡里反省。🌿",
+      "小G申请上诉！😭"
+    ];
+
+    function randomFrom(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function pokeG() {
+      speech.textContent = randomFrom(pokeLines);
+    }
+
+    function feedG() {
+      speech.textContent = "嗷呜！🍪……还、还可以再来一块。";
+      status.textContent = "心情：🥰　饱腹度：♥♥♥♥♡";
+    }
+
+    function dressG() {
+      speech.textContent = "今天穿什么？👕👗👘……不许再让我一只脚穿靴子！";
+    }
+
+    function punishG() {
+      speech.textContent = randomFrom(punishments);
+      status.textContent = "心情：委屈巴巴 🥺　正在服刑……";
+    }
+  </script>
+
+</body>
+</html>
