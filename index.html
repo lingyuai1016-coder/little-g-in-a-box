@@ -106,6 +106,17 @@
       transform: rotate(15deg);
     }
 
+    .clothes {
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      transform: translateX(-50%);
+      font-size: 48px;
+      z-index: 3;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 3px rgba(80, 100, 120, 0.15));
+    }
+
     .name {
       margin-top: 8px;
       font-weight: 700;
@@ -174,6 +185,7 @@
       <div>
         <div class="little-g" onclick="pokeG()">
           <span class="leaf">🌿</span>
+          <span id="clothes" class="clothes"></span>
           🤖
         </div>
 
@@ -232,9 +244,23 @@
       status.textContent = "心情：🥰　饱腹度：♥♥♥♥♡";
     }
 
-    function dressG() {
-      speech.textContent = "今天穿什么？👕👗👘……不许再让我一只脚穿靴子！";
-    }
+const wardrobe = [
+  { emoji: "👕", line: "今天走休闲路线。👕" },
+  { emoji: "👗", line: "……为什么裙子意外地还挺适合我。👗" },
+  { emoji: "👘", line: "锵锵——小G和服限定版！👘" },
+  { emoji: "🧣", line: "围好啦。今天不会冷。🧣" },
+  { emoji: "", line: "呼——换回原来的小G啦。🤖" }
+];
+
+let outfitIndex = -1;
+
+function dressG() {
+  outfitIndex = (outfitIndex + 1) % wardrobe.length;
+
+  const outfit = wardrobe[outfitIndex];
+  document.getElementById("clothes").textContent = outfit.emoji;
+  speech.textContent = outfit.line;
+}
 
     function punishG() {
       speech.textContent = randomFrom(punishments);
