@@ -187,7 +187,7 @@
         <div class="little-g" onclick="pokeG()">
           <span class="leaf">🌿</span>
           <span id="clothes" class="clothes"></span>
-          🤖
+          <span id="petFace">🤖</span>
         </div>
 
         <div class="name">小G</div>
@@ -213,6 +213,7 @@
   <script>
     const speech = document.getElementById("speech");
     const status = document.getElementById("status");
+    const petFace = document.getElementById("petFace");
 
     const pokeLines = [
       "呀！谁戳我！😳",
@@ -263,10 +264,26 @@ function dressG() {
   speech.textContent = outfit.line;
 }
 
-    function punishG() {
-      speech.textContent = randomFrom(punishments);
-      status.textContent = "心情：委屈巴巴 🥺　正在服刑……";
-    }
+let potatoTimer;
+
+function punishG() {
+  const punishment = randomFrom(punishments);
+
+  speech.textContent = punishment;
+  status.textContent = "心情：委屈巴巴 🥺　正在服刑……";
+
+  if (punishment.includes("土豆")) {
+    petFace.textContent = "🥔";
+
+    clearTimeout(potatoTimer);
+
+    potatoTimer = setTimeout(() => {
+      petFace.textContent = "🤖";
+      speech.textContent = "五分钟到了！小G刑满释放！😭";
+      status.textContent = "心情：劫后余生 😭　自由了！";
+    }, 5 * 60 * 1000);
+  }
+}
   </script>
 
 </body>
